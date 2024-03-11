@@ -4,7 +4,9 @@ import argparse
 parser = argparse.ArgumentParser(
     description="Check git status of all git repositories in a directory"
 )
-parser.add_argument("--dir", type=str, help="Directory to check", required=True)
+parser.add_argument(
+    "--dir", type=str, help="Directory to check", default="/home/sumit/Development/"
+)
 args = parser.parse_args()
 
 directory = args.dir
