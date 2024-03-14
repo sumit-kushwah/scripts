@@ -43,7 +43,15 @@ unremote_dirs = []
 
 for root, dirs, files in os.walk(directory):
     if ".git" in dirs:
-        print(f"Checking {root}")
+        current_branch = get_current_branch(root)
+        print(
+            Fore.LIGHTGREEN_EX
+            + f"Checking {root}"
+            + Style.RESET_ALL
+            + Fore.YELLOW
+            + f" ({current_branch})"
+            + Style.RESET_ALL
+        )
         if check_commit_needed(root):
             uncommitted_dirs.append(root)
         if not check_if_remote_exists(root):

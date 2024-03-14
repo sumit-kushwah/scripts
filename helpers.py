@@ -67,3 +67,11 @@ def get_current_branch(directory: str) -> str:
     os.chdir(directory)
     result = os.popen("git branch --show-current").read().strip()
     return result
+
+
+def get_all_git_dirs(directory: str) -> list:
+    git_dirs = []
+    for root, dirs, files in os.walk(directory):
+        if ".git" in dirs:
+            git_dirs.append(root)
+    return git_dirs
