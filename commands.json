@@ -1,7 +1,12 @@
 [
     {   
-        "alias": "gc",
+        "alias": "gitreport",
         "file": "check_git_status.py",
+        "program": "python3"
+    },
+    {   
+        "alias": "autopush",
+        "file": "auto_commit.py",
         "program": "python3"
     }
 ]
