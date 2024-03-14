@@ -1,4 +1,4 @@
-# Project Title
+# Scripts
 
 This project provides a convenient way to add aliases for frequently used commands.
 
