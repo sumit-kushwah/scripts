@@ -33,3 +33,31 @@ def get_unremote_dirs(directory: str) -> list:
             if not check_if_remote_exists(root):
                 unremote_dirs.append(root)
     return unremote_dirs
+
+
+def get_remote_dirs(directory: str) -> list:
+    remote_dirs = []
+    for root, dirs, files in os.walk(directory):
+        if ".git" in dirs:
+            if check_if_remote_exists(root):
+                remote_dirs.append(root)
+    return remote_dirs
+
+
+def get_remote_url(directory: str) -> str:
+    os.chdir(directory)
+    result = os.popen("git remote get-url origin").read().strip()
+    return result
+
+
+def check_if_https_url(url: str) -> bool:
+    return "https://" in url
+
+
+def ssh_to_https(ssh_url):
+    if check_if_https_url(ssh_url):
+        return ssh_url
+    https_url = ssh_url.replace(":", "/")
+    https_url = https_url.replace("git@", "https://")
+    https_url = https_url[:-4] if https_url.endswith(".git") else https_url
+    return https_url

@@ -1,5 +1,7 @@
 import os
 import argparse
+from helpers import get_remote_url
+from colorama import Fore, Style
 
 parser = argparse.ArgumentParser(
     description="Check git status of all git repositories in a directory"
@@ -50,9 +52,9 @@ for root, dirs, files in os.walk(directory):
 if uncommitted_dirs:
     print("\nThe following directories have uncommitted changes:")
     for d in uncommitted_dirs:
-        print(d)
+        print(Fore.RED + d + Style.RESET_ALL)
 
 if unremote_dirs:
     print("\nThe following directories do not have a remote:")
     for d in unremote_dirs:
-        print(d)
+        print(Fore.LIGHTMAGENTA_EX + d + Style.RESET_ALL)
