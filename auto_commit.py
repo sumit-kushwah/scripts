@@ -40,6 +40,10 @@ branch = args.branch
 
 uncommitted_dirs = get_uncommitted_dirs(directory)
 
+if len(uncommitted_dirs) == 0:
+    print("No uncommitted changes found")
+    exit(0)
+
 print(f"Committing uncommited changes with message: {commit_message}")
 
 for d in uncommitted_dirs:

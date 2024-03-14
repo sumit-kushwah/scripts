@@ -1,7 +1,7 @@
 [
     {   
         "alias": "gitreport",
-        "file": "check_git_status.py",
+        "file": "gen_git_report.py",
         "program": "python3"
     },
     {   
