@@ -1,6 +1,6 @@
 import os
 import argparse
-from helpers import get_remote_url
+from helpers import get_remote_url, get_current_branch
 from colorama import Fore, Style
 
 parser = argparse.ArgumentParser(
@@ -52,7 +52,15 @@ for root, dirs, files in os.walk(directory):
 if uncommitted_dirs:
     print("\nThe following directories have uncommitted changes:")
     for d in uncommitted_dirs:
-        print(Fore.RED + d + Style.RESET_ALL)
+        current_branch = get_current_branch(d)
+        print(
+            Fore.RED
+            + d
+            + Style.RESET_ALL
+            + Fore.YELLOW
+            + f" ({current_branch})"
+            + Style.RESET_ALL
+        )
 
 if unremote_dirs:
     print("\nThe following directories do not have a remote:")

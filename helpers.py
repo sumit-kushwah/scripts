@@ -61,3 +61,9 @@ def ssh_to_https(ssh_url):
     https_url = https_url.replace("git@", "https://")
     https_url = https_url[:-4] if https_url.endswith(".git") else https_url
     return https_url
+
+
+def get_current_branch(directory: str) -> str:
+    os.chdir(directory)
+    result = os.popen("git branch --show-current").read().strip()
+    return result
