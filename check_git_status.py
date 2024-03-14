@@ -5,7 +5,11 @@ parser = argparse.ArgumentParser(
     description="Check git status of all git repositories in a directory"
 )
 parser.add_argument(
-    "--dir", type=str, help="Directory to check", default="/home/sumit/Development/"
+    "--dir",
+    "-d",
+    type=str,
+    help="Directory to check",
+    default="/home/sumit/Development/",
 )
 args = parser.parse_args()
 
