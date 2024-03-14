@@ -29,4 +29,7 @@ print("Remote: " + remote_url)
 https_url = ssh_to_https(remote_url)
 print("HTTPS URL: " + https_url)
 print("Opening in browser...")
-print(os.system(f"xdg-open {https_url}"))
+success = os.system(f"xdg-open {https_url}")
+if success != 0:
+    print("Could not open in browser")
+    exit(1)
