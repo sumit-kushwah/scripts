@@ -1,0 +1,7 @@
+[
+    {   
+        "alias": "gc",
+        "file": "check_git_status.py",
+        "program": "python3"
+    }
+]
