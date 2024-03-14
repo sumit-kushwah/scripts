@@ -4,12 +4,13 @@ from helpers import ssh_to_https, check_if_remote_exists, get_remote_url
 
 parser = argparse.ArgumentParser(description="Open remote repository in browser")
 
+# read the directory from first passed argument
+
+
 parser.add_argument(
-    "--dir",
-    "-d",
+    "dir",
     type=str,
     help="Directory to check",
-    required=True,
 )
 args = parser.parse_args()
 
