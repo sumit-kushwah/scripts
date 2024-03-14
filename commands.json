@@ -2,11 +2,19 @@
     {   
         "alias": "gitreport",
         "file": "gen_git_report.py",
-        "program": "python3"
+        "program": "python3",
+        "description": "Generates a report of all Git repositories in a specified directory."
     },
     {   
         "alias": "autopush",
         "file": "auto_commit.py",
-        "program": "python3"
+        "program": "python3",
+        "description": "Automatically commits and pushes changes in all git repositories or specified directory."
+    },
+    {   
+        "alias": "openremote",
+        "file": "open_remote.py",
+        "program": "python3",
+        "description": "Opens the remote URL of the current Git repository in a web browser."
     }
 ]
