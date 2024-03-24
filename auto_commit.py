@@ -70,8 +70,7 @@ print("Force push other git repositories")
 gitrepos = get_all_git_dirs(directory)
 
 for d in gitrepos:
+    print("----------------------------------------------")
     print(f"Force pushing {d} to origin/{branch}")
-    print("------------------------")
     os.chdir(d)
     os.system(f"git push origin {branch}")
-    print(f"Force pushed {d} to origin/{branch}")
