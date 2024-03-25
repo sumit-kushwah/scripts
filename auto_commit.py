@@ -13,7 +13,7 @@ parser.add_argument(
     "-m",
     type=str,
     help="Commit message to use",
-    default="Auto commit at " + str(datetime.datetime.now()),
+    default="Auto commit by skbot at " + str(datetime.datetime.now()),
 )
 # if all flag set, then no need to ask for directory
 parser.add_argument(
