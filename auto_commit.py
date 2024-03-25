@@ -1,7 +1,7 @@
 import os
 import datetime
 import argparse
-from helpers import get_uncommitted_dirs, get_all_git_dirs
+from helpers import get_uncommitted_dirs, get_all_git_dirs, get_current_branch
 
 parser = argparse.ArgumentParser(
     description="Auto commit all git repositories which have uncommitted changes"
@@ -32,19 +32,9 @@ parser.add_argument(
     default=False,
 )
 
-# get branch
-parser.add_argument(
-    "--branch",
-    "-b",
-    type=str,
-    help="Branch to push",
-    default="master",
-)
-
 args = parser.parse_args()
 commit_message = args.message
 directory = args.dir
-branch = args.branch
 force = args.force
 
 if force:
@@ -62,6 +52,7 @@ for d in uncommitted_dirs:
     os.chdir(d)
     os.system("git add .")
     os.system(f'git commit -m "{commit_message}"')
+    branch = get_current_branch(d)
     os.system("git push origin " + branch)
     print(f"Pushed {d} to origin/{branch}")
 
@@ -71,6 +62,7 @@ gitrepos = get_all_git_dirs(directory)
 
 for d in gitrepos:
     print("----------------------------------------------")
+    branch = get_current_branch(d)
     print(f"Force pushing {d} to origin/{branch}")
     os.chdir(d)
     os.system(f"git push origin {branch}")
