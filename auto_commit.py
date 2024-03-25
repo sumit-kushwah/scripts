@@ -57,7 +57,7 @@ for d in uncommitted_dirs:
     print(f"Pushed {d} to origin/{branch}")
 
 if force:
-    print("Force push other git repositories")
+    print("Force push git repositories")
 
     gitrepos = get_all_git_dirs(directory)
 
