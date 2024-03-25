@@ -1,6 +1,6 @@
 import os
 import argparse
-from helpers import get_remote_url, get_current_branch
+from helpers import get_remote_url, get_current_branch, check_pull_push_needed
 from colorama import Fore, Style
 
 parser = argparse.ArgumentParser(
@@ -62,8 +62,11 @@ for root, dirs, files in os.walk(directory):
             remote_url = get_remote_url(root)
             os.chdir(root)
             os.system("git fetch")
-            local_head = os.popen("git rev-parse HEAD").read().strip()
-            remote_head = os.popen(f"git ls-remote {remote_url} HEAD").read().split()[0]
+            branch = get_current_branch(root)
+            local_head = os.popen(f"git rev-parse {branch}").read().strip()
+            remote_head = (
+                os.popen(f"git ls-remote {remote_url} {branch}").read().split()[0]
+            )
             if local_head != remote_head:
                 remote_diff_dirs.append(root)
 
@@ -84,3 +87,21 @@ if unremote_dirs:
     print("\nThe following directories do not have a remote:")
     for d in unremote_dirs:
         print(Fore.LIGHTMAGENTA_EX + d + Style.RESET_ALL)
+
+if remote_diff_dirs:
+    print(
+        "\nThe following directories have local and remote branch at different commits:"
+    )
+    for d in remote_diff_dirs:
+        current_branch = get_current_branch(d)
+        pull_push_status = check_pull_push_needed(d)
+        message = "Run git pull" if pull_push_status == 1 else "Run git push"
+        print(
+            Fore.LIGHTCYAN_EX
+            + d
+            + Style.RESET_ALL
+            + Fore.YELLOW
+            + f" ({current_branch})"
+            + f" - {message}"
+            + Style.RESET_ALL
+        )

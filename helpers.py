@@ -75,3 +75,14 @@ def get_all_git_dirs(directory: str) -> list:
         if ".git" in dirs:
             git_dirs.append(root)
     return git_dirs
+
+
+# function to check if git pull is needed or git push is needed return 1 if pull is needed and 2 if push is needed
+def check_pull_push_needed(path: str) -> bool:
+    os.chdir(path)
+    result = os.popen("git status").read()
+    if "Your branch is ahead" in result:
+        return 2
+    elif "Your branch is behind" in result:
+        return 1
+    return 0

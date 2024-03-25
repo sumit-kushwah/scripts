@@ -56,13 +56,14 @@ for d in uncommitted_dirs:
     os.system("git push origin " + branch)
     print(f"Pushed {d} to origin/{branch}")
 
-print("Force push other git repositories")
+if force:
+    print("Force push other git repositories")
 
-gitrepos = get_all_git_dirs(directory)
+    gitrepos = get_all_git_dirs(directory)
 
-for d in gitrepos:
-    print("----------------------------------------------")
-    branch = get_current_branch(d)
-    print(f"Force pushing {d} to origin/{branch}")
-    os.chdir(d)
-    os.system(f"git push origin {branch}")
+    for d in gitrepos:
+        print("----------------------------------------------")
+        branch = get_current_branch(d)
+        print(f"Force pushing {d} to origin/{branch}")
+        os.chdir(d)
+        os.system(f"git push origin {branch}")
