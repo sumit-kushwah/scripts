@@ -58,17 +58,20 @@ for root, dirs, files in os.walk(directory):
         if not check_if_remote_exists(root):
             unremote_dirs.append(root)
         if check_if_remote_exists(root):
-            # check if local and remote branch have same head
-            remote_url = get_remote_url(root)
-            os.chdir(root)
-            os.system("git fetch")
-            branch = get_current_branch(root)
-            local_head = os.popen(f"git rev-parse {branch}").read().strip()
-            remote_head = (
-                os.popen(f"git ls-remote {remote_url} {branch}").read().split()[0]
-            )
-            if local_head != remote_head:
-                remote_diff_dirs.append(root)
+            try:
+                # check if local and remote branch have same head
+                remote_url = get_remote_url(root)
+                os.chdir(root)
+                os.system("git fetch")
+                branch = get_current_branch(root)
+                local_head = os.popen(f"git rev-parse {branch}").read().strip()
+                remote_head = (
+                    os.popen(f"git ls-remote {remote_url} {branch}").read().split()[0]
+                )
+                if local_head != remote_head:
+                    remote_diff_dirs.append(root)
+            except Exception as e:
+                print(f"Error: {e}")
 
 if uncommitted_dirs:
     print("\nThe following directories have uncommitted changes:")
